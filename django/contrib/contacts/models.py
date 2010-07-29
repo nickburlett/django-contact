@@ -120,11 +120,7 @@ class Identity(models.Model):
         return field_list
 
     def __unicode__(self):
-        if not getattr(self, 'person') is None:
-            return str(self.person)
-
-        if not getattr(self, 'company') is None:
-            return str(self.company)
+        return self.get_child()
 
 class Person(Identity):
     """ An identity that is a person, or possibly is masquerading as one! """
