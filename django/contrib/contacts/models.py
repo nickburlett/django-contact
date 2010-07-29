@@ -93,19 +93,11 @@ class Identity(models.Model):
     field_data = models.ManyToManyField(IdentityData, related_name='identity', blank=True)
 
     def get_subclass(self):
-        # TODO: Figure out a better way to do this. getattr throws an exception because
-        # django attempts to query for a non-existing person when that attr is accessed.
-        try:
-            if not getattr(self, 'person') is None:
-                return Person
-        except:
-            pass
+        if not getattr(self, 'person') is None:
+            return Person
 
-        try:
-            if not getattr(self, 'company') is None:
-                return Company
-        except:
-            pass
+        if not getattr(self, 'company') is None:
+            return Company
 
     def get_field_data(self, model=None):
         field_list = []
