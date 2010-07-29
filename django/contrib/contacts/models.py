@@ -120,7 +120,7 @@ class Identity(models.Model):
         return field_list
 
     def __unicode__(self):
-        return self.get_child()
+        return str(self.get_child())
 
 class Person(Identity):
     """ An identity that is a person, or possibly is masquerading as one! """
