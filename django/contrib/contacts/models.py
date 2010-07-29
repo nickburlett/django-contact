@@ -92,18 +92,23 @@ class IdentityData(models.Model):
 class Identity(models.Model):
     field_data = models.ManyToManyField(IdentityData, related_name='identity', blank=True)
 
-    def get_subclass(self):
-        try:
-            if not getattr(self, 'person') is None:
-                return Person
-        except:
-            pass
+    def get_child(self):
+        # TODO: Thanks to SmileyChris for this one
+        from django.core.exceptions import ObjectDoesNotExist
+        for related_object in self._meta.get_all_related_objects():
+            if not issubclass(related_object.model, self.__class__):
+                continue
+            try:
+                return getattr(self, related_object.get_accessor_name())
+            except ObjectDoesNotExist:
+                pass
 
-        try:
-            if not getattr(self, 'company') is None:
-                return Company
-        except:
-            pass
+    def get_subclass(self):
+        for related_object in self._meta.get_all_related_objects():
+            if not issubclass(related_object.model, self.__class__):
+                continue
+
+            return related_object.__class__
 
     def get_field_data(self, model=None):
         field_list = []
