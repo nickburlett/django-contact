@@ -7,6 +7,6 @@ setup(name='Django Contacts',
       author='Brandon R. Stoner',
       author_email='monokrome@monokro.me',
       url='http://monokro.me/',
-      packages=['django.contrib.contacts'],
+      packages=['contacts'],
     )
 
