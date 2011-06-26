@@ -20,7 +20,7 @@ for filename in meta_files:
 classifiers = meta_files['CLASSIFIERS.txt'].split('\n')
 classifiers.remove('')
 
-setup(name='django-contacts',
+setup(name='django-contact',
       version='0.1',
       description='System for working with contacts/identities in django.',
       long_description=meta_files['README.md'],
