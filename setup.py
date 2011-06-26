@@ -27,8 +27,8 @@ setup(name='django-contact',
       classifiers=classifiers,
       author='Brandon R. Stoner',
       author_email='monokrome@limpidtech.com',
-      url='http://github.com/LimpidTech/django-contacts',
-      packages=['contacts'],
+      url='http://github.com/LimpidTech/django-contact',
+      packages=['contact'],
       keywords = 'web django menu navigation',
 )
 
