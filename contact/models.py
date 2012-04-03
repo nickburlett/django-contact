@@ -107,7 +107,6 @@ class Identity(models.Model):
     field_data = models.ManyToManyField(IdentityData, related_name='identity', blank=True)
 
     def get_child(self):
-        # TODO: Thanks to SmileyChris for this one
         from django.core.exceptions import ObjectDoesNotExist
         for related_object in self._meta.get_all_related_objects():
             if not issubclass(related_object.model, self.__class__):
