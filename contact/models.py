@@ -1,5 +1,4 @@
 from django.contrib.contenttypes.models import ContentType
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes import generic
 from model_utils.managers import InheritanceManager
 from django.db import models
