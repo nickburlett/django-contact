@@ -8,10 +8,12 @@ from django.db import models
 
 
 class LocationType(models.Model):
-    """ Represents a type of location that specific contact information
-        might be related to. For instance, someone might have both an
-        "office" and a "home" phone number. This represents two location
-        types, "office" and "home".
+    """ The place where an item exists.
+
+    Represents a type of location that specific contact information
+    might be related to. For instance, someone might have both an
+    "office" and a "home" phone number. This represents two location
+    types, "office" and "home".
 
     """
 
