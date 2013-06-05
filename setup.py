@@ -33,7 +33,7 @@ setup(name='django-contact',
       description='System for working with contacts/identities in django.',
       long_description=meta_files['README.md'],
 
-      version='0.1.1',
+      version='0.1.2',
       classifiers=classifiers,
 
       author='Brandon R. Stoner',
