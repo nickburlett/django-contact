@@ -1,1 +1,2 @@
 django-model-utils==1.4.0
+flake8==2.0
