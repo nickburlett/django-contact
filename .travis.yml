@@ -5,5 +5,5 @@ python:
   - "3.2"
   - "3.3"
 install: "python setup.py install"
-script: "echo"
+script: "flake8 contact"
 
