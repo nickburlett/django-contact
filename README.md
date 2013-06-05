@@ -1,6 +1,8 @@
 # Django Contacts
 #### Brandon R. Stoner <monokrome@monokro.me>
 
+[![Build Status](https://travis-ci.org/LimpidTech/django-contact.png?branch=develop)](https://travis-ci.org/LimpidTech/django-contact)
+
 ## What is this?
 
 A simple, fairly flexible framework for working with user contacts in
