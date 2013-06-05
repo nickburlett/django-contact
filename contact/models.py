@@ -77,6 +77,7 @@ class Email(models.Model):
     """ Represents an email's address and the location data relative to it. """
 
     address = models.EmailField()
+
     location = models.ForeignKey(
         LocationType,
         related_name='emails',
@@ -111,6 +112,7 @@ class CustomData(models.Model):
 
     key = models.CharField(max_length=32)
     value = models.CharField(max_length=192)
+
     location = models.ForeignKey(
         LocationType,
         related_name='custom_data',
