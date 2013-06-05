@@ -1,5 +1,14 @@
 #!/usr/bin/env python
-from distutils.core import setup
+
+try:
+    from setuptools import setup
+
+except ImportError:
+    from ez_setup import use_setuptools
+    use_setuptools()
+
+    from setuptools import setup
+
 import os
 
 parent_directory = os.path.abspath(os.path.dirname(__file__))
@@ -21,14 +30,19 @@ classifiers = meta_files['CLASSIFIERS.txt'].split('\n')
 classifiers.remove('')
 
 setup(name='django-contact',
-      version='0.1',
       description='System for working with contacts/identities in django.',
       long_description=meta_files['README.md'],
+
+      version='0.1',
       classifiers=classifiers,
+
       author='Brandon R. Stoner',
       author_email='monokrome@limpidtech.com',
       url='http://github.com/LimpidTech/django-contact',
-      packages=['contact'],
-      keywords = 'web django menu navigation',
-)
 
+      packages=['contact'],
+      keywords='web django menu navigation',
+
+      zip_safe=False,
+
+      install_requires=[])
