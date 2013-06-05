@@ -26,7 +26,12 @@ class WebSite(models.Model):
 
     name = models.CharField(max_length=64, null=True, blank=True)
     url = models.URLField(max_length=128)
-    location = models.ForeignKey(LocationType, related_name='websites', null=True, blank=True)
+
+    location = models.ForeignKey(
+        LocationType,
+        related_name='websites',
+        null=True,
+        blank=True)
 
     def __unicode__(self):
         if not self.name is None:
@@ -39,7 +44,12 @@ class Phone(models.Model):
     """ Represents a phone. This phone has a number and a location. """
 
     number = models.CharField(max_length=17) # TODO: Use localflavor for phone numbers?
-    location = models.ForeignKey(LocationType, related_name='phones', null=True, blank=True)
+
+    location = models.ForeignKey(
+        LocationType,
+        related_name='phones',
+        null=True,
+        blank=True)
 
     def __unicode__(self):
         return self.number
@@ -64,14 +74,18 @@ class Email(models.Model):
     """ Represents an email's address and the location data relative to it. """
 
     address = models.EmailField()
-    location = models.ForeignKey(LocationType, related_name='emails', null=True, blank=True)
+    location = models.ForeignKey(
+        LocationType,
+        related_name='emails',
+        null=True,
+        blank=True)
 
     def __unicode__(self):
         return '%s (%s)' % (self.address, self.location)
 
 
 class Date(models.Model):
-    """ In case someone wants to remember an important date, we provide a date model. """
+    """ A model for storing date information. """
 
     name = models.CharField(max_length=64)
     date = models.DateTimeField()
@@ -81,9 +95,11 @@ class Date(models.Model):
 
 
 class CustomData(models.Model):
-    """ This is a simple type of field data that can be linked to an identity
-        so that "unsupported" types of data are able to be linked to your
-        contacts if ever required.
+    """ Field for storing generic Identity metadata.
+
+    This is a simple type of field data that can be linked to an identity
+    so that "unsupported" types of data are able to be linked to your
+    contacts if ever required.
 
     """
 
@@ -92,7 +108,11 @@ class CustomData(models.Model):
 
     key = models.CharField(max_length=32)
     value = models.CharField(max_length=192)
-    location = models.ForeignKey(LocationType, related_name='custom_data', null=True, blank=True)
+    location = models.ForeignKey(
+        LocationType,
+        related_name='custom_data',
+        null=True,
+        blank=True)
 
     def __unicode__(self):
         return '%s %s' % (self.key, self.location)
@@ -114,7 +134,10 @@ class IdentityData(models.Model):
 
 
 class Identity(models.Model):
-    field_data = models.ManyToManyField(IdentityData, related_name='identity', blank=True)
+    field_data = models.ManyToManyField(
+        IdentityData,
+        related_name='identity',
+        blank=True)
 
     objects = InheritanceManager()
 
@@ -146,7 +169,7 @@ class Person(Identity):
 
 
 class Company(Identity):
-    """ An organization or other entity that has an identity but is not a person. """
+    """ An organization that is not a specific person. """
 
     class Meta(object):
         verbose_name_plural = 'companies'
