@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes import generic
+from model_utils.managers import InheritanceManager
 from django.db import models
 
 # TODO: Look into adapting this to use GIS data when possible
@@ -72,7 +73,7 @@ class Date(models.Model):
 
     def __unicode__(self):
         return self.name
-    
+
 class CustomData(models.Model):
     """ This is a simple type of field data that can be linked to an identity
         so that "unsupported" types of data are able to be linked to your
@@ -107,21 +108,7 @@ class IdentityData(models.Model):
 class Identity(models.Model):
     field_data = models.ManyToManyField(IdentityData, related_name='identity', blank=True)
 
-    def get_child(self):
-        for related_object in self._meta.get_all_related_objects():
-            if not issubclass(related_object.model, self.__class__):
-                continue
-            try:
-                return getattr(self, related_object.get_accessor_name())
-            except ObjectDoesNotExist:
-                pass
-
-    def get_subclass(self):
-        for related_object in self._meta.get_all_related_objects():
-            if not issubclass(related_object.model, self.__class__):
-                continue
-
-            return related_object.__class__
+    objects = InheritanceManager()
 
     def get_field_data(self, model=None):
         field_list = []
@@ -131,9 +118,6 @@ class Identity(models.Model):
                 field_list.append(item.content_object)
 
         return field_list
-
-    def __unicode__(self):
-        return str(self.get_child())
 
 class Person(Identity):
     """ An identity that is a person, or possibly is masquerading as one! """

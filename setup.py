@@ -45,4 +45,6 @@ setup(name='django-contact',
 
       zip_safe=False,
 
-      install_requires=[])
+      install_requires=[
+          'django-model-utils >= 1.4.0, < 2.0',
+      ])
