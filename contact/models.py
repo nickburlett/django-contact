@@ -7,6 +7,7 @@ from django.db import models
 # TODO: Look into adapting this to use GIS data when possible
 # TODO: Consider whether "location" is the best name for these properties
 
+
 class LocationType(models.Model):
     """ Represents a type of location that specific contact information
         might be related to. For instance, someone might have both an
@@ -19,6 +20,7 @@ class LocationType(models.Model):
 
     def __unicode__(self):
         return self.name
+
 
 class WebSite(models.Model):
     """ A website that is affiliate with this contact """
@@ -33,6 +35,7 @@ class WebSite(models.Model):
 
         return self.url
 
+
 class Phone(models.Model):
     """ Represents a phone. This phone has a number and a location. """
 
@@ -41,6 +44,7 @@ class Phone(models.Model):
 
     def __unicode__(self):
         return self.number
+
 
 class Address(models.Model):
     """ Represents a location on Earth. My apologies in the case that you
@@ -56,6 +60,7 @@ class Address(models.Model):
     def __unicode__(self):
         return 'Not yet implemented.'
 
+
 class Email(models.Model):
     """ Represents an email's address and the location data relative to it. """
 
@@ -65,6 +70,7 @@ class Email(models.Model):
     def __unicode__(self):
         return '%s (%s)' % (self.address, self.location)
 
+
 class Date(models.Model):
     """ In case someone wants to remember an important date, we provide a date model. """
 
@@ -73,6 +79,7 @@ class Date(models.Model):
 
     def __unicode__(self):
         return self.name
+
 
 class CustomData(models.Model):
     """ This is a simple type of field data that can be linked to an identity
@@ -91,6 +98,7 @@ class CustomData(models.Model):
     def __unicode__(self):
         return '%s %s' % (self.key, self.location)
 
+
 class IdentityData(models.Model):
     """ Arbitrary data that can be linked to a contact. """
 
@@ -105,6 +113,7 @@ class IdentityData(models.Model):
     def __unicode__(self):
         return self.content_object.__unicode__()
 
+
 class Identity(models.Model):
     field_data = models.ManyToManyField(IdentityData, related_name='identity', blank=True)
 
@@ -118,6 +127,7 @@ class Identity(models.Model):
                 field_list.append(item.content_object)
 
         return field_list
+
 
 class Person(Identity):
     """ An identity that is a person, or possibly is masquerading as one! """
@@ -135,6 +145,7 @@ class Person(Identity):
     def __unicode__(self):
         return self.full_name()
 
+
 class Company(Identity):
     """ An organization or other entity that has an identity but is not a person. """
 
@@ -146,6 +157,7 @@ class Company(Identity):
     def __unicode__(self):
         return self.name
 
+
 class Group(models.Model):
     """ Allows identities to be added to different groups in the system. """
 
@@ -154,4 +166,3 @@ class Group(models.Model):
 
     def __unicode__(self):
         return self.name
-
