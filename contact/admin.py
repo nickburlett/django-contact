@@ -1,6 +1,5 @@
 from django.contrib import admin
-from models import LocationType, Phone, Address, Email,  Person, Company, \
-                   WebSite, Group, CustomData, IdentityData
+from models import LocationType, Phone, Address, Email,  Person, Company, WebSite, Group, CustomData, IdentityData
 
 admin.site.register(LocationType)
 admin.site.register(Phone)
