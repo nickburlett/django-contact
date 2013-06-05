@@ -43,7 +43,8 @@ class WebSite(models.Model):
 class Phone(models.Model):
     """ Represents a phone. This phone has a number and a location. """
 
-    number = models.CharField(max_length=17) # TODO: Use localflavor for phone numbers?
+    # TODO: Possibly use localflavor for phone numbers.
+    number = models.CharField(max_length=17)
 
     location = models.ForeignKey(
         LocationType,
