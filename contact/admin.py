@@ -22,4 +22,3 @@ admin.site.register(IdentityData)
 
 admin.site.register(Person)
 admin.site.register(Company)
-
