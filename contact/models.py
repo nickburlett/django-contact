@@ -146,7 +146,19 @@ class Identity(models.Model):
         field_list = []
 
         for item in self.field_data.all():
-            if model is None or (item.content_type.app_label == model._meta.app_label and item.content_type.model == model._meta.object_name.lower()):
+            # Data for verifying that the model is from this app
+            item_app_label = item.content_type.app_label
+            model_app_label = model._meta.app_label
+
+            is_same_app = item_app_label == model_app_label
+
+            # Data for verifying that the model is a related type
+            item_model = item.content_type.model
+            model_name = model._meta.object_name.lower()
+
+            is_related_model = item_model == model_name
+
+            if model is None or (is_same_app and is_related_model):
                 field_list.append(item.content_object)
 
         return field_list
