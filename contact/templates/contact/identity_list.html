@@ -1,0 +1,7 @@
+<ul>
+{% for object in object_list %}
+    <li> {{ object }} </li>
+{% empty %}
+    <li class=warning>No contacts found.</li>
+{% endfor %}
+</ul>
